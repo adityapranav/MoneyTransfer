@@ -6,7 +6,9 @@
 
 2. Create a Transfer between two Accounts of same currency. Execute the Transfer to commit it.
 
-NOTE: Transfer creation is extremely dumb. Execution checks for the below aspects
+## NOTE: 
+    Transfer creation is extremely dumb. 
+    Transfer execution checks for the below aspects
    a. Whether the transaction is in a sane ( TRAN_CREATED ) state ( There are three status for a Transacion TRAN_CREATED, TRAN_EXECUTED, TRAN_FAILED )
    b. Whether the source and Destination accounts have same currency.
    
@@ -25,6 +27,9 @@ NOTE: Transfer creation is extremely dumb. Execution checks for the below aspect
 
 4. Persistent Logging 
 
+# Tools and Technologies used to develop this 
+
+Eclipse, Maven, Java8, vertx.
 
 # Create an Account
 
