@@ -42,7 +42,7 @@ Eclipse, Maven, Java8, vertx.
 # Create an Account
 
 ## Request
-
+```
 POST  http://localhost:8080/api/accounts
 
 {
@@ -50,23 +50,23 @@ POST  http://localhost:8080/api/accounts
     "balance": 1000,
     "currency": "EUR"
 }
-
+```
 ## Response
-
+```
 {
     "id": 1,
     "name": "testAccount",
     "balance": 1000,
     "currency": "EUR"
 }
-
+```
 # Get all Accounts 
 
 ## Request
 GET localhost:8080/api/accounts
 
 ## Response
-
+```
 [
     {
         "id": 1,
@@ -81,7 +81,7 @@ GET localhost:8080/api/accounts
         "currency": "EUR"
     }
 ]
-
+```
 # Get Account Details
 
 ## Request 
@@ -89,14 +89,14 @@ GET localhost:8080/api/accounts
 GET localhost:8080/api/accounts/1
 
 ## Response
-
+```
 {
     "id": 1,
     "name": "testAccount",
     "balance": 1000,
     "currency": "EUR"
 }
-
+```
 # Delete an Account 
 
 ## Request
@@ -107,37 +107,37 @@ DELETE localhost:8080/api/accounts/1
 
 ## Request
 PATCH localhost:8080/api/accounts/2
-
+```
 {
     "name": "UpdatedAccountPatch",
     "balance": "8000",   ##Note this Double quotes :-) 
     "currency": "EUR"
 }
-
+```
 ## Response
-
+```
 {
     "id": 2,
     "name": "UpdatedAccountPatch2",
     "balance": 8000,
     "currency": "EUR"
 }
-
+```
 
 # create a Transfer 
 
 ## Request 
 
-POST localhost:8080/api/transfers
-
+## POST localhost:8080/api/transfers
+```
 {
     "srcAcctNum": 1,
     "destAcctNum": 2,
     "amount": 100
 }
-
+```
 ## Response
-
+```
 {
     "id": 1,
     "srcAcctNum": 1,
@@ -147,13 +147,13 @@ POST localhost:8080/api/transfers
     "status": "TRAN_CREATED",
     "remarks": "Transaction Created" 
 }
-
+```
 # Execute a Transfer 
 
 ## Request 
 
-PUT localhost:8080/transfers/1 
-
+## PUT localhost:8080/transfers/1 
+```
 {
     "id": 1,
     "srcAcctNum": 1,
@@ -163,9 +163,9 @@ PUT localhost:8080/transfers/1
     "status": "TRAN_CREATED",
     "remarks": "Transaction Created"
 }
-
+```
 ## Response
-
+```
 {
     "id": 1,
     "srcAcctNum": 1,
@@ -175,15 +175,15 @@ PUT localhost:8080/transfers/1
     "status": "TRAN_EXECUTED",
     "remarks": "Transaction Executed Successfully!"
 }
-
+```
 # Get a Transaction 
 
 # Request 
 
-GET localhost:8080/api/transfers/1
+## GET localhost:8080/api/transfers/1
 
 # Response 
-
+```
 {
     "id": 1,
     "srcAcctNum": 1,
@@ -193,11 +193,11 @@ GET localhost:8080/api/transfers/1
     "status": "TRAN_EXECUTED",
     "remarks": "Transaction Executed Successfully!"
 }
-
+```
 # An Illustation of a Failed Transaction 
 
 ## Let's look at two accounts 
-
+```
 [
     {
         "id": 1,
@@ -212,19 +212,20 @@ GET localhost:8080/api/transfers/1
         "currency": "EUR"
     }
 ]
+```
 
 ## Let's Post a Debit Transaction from Account 2 with amount greater than 1900 
 
 ## POST localhost:8080/api/transfers
-
+```
 {
     "srcAcctNum": 1,
     "destAcctNum": 2,
     "amount": 10000
 }
-
+```
 ## Response 
-
+```
 {
     "id": 3,
     "srcAcctNum": 1,
@@ -234,12 +235,12 @@ GET localhost:8080/api/transfers/1
     "status": "TRAN_CREATED",
     "remarks": "Transaction Created"
 }
-
+```
 ## Now, Let's Try to Execute the Transfer 
 
 ## PUT localhost:8080/api/transfers/3
 
-
+```
 {
     "id": 3,
     "srcAcctNum": 1,
@@ -249,9 +250,9 @@ GET localhost:8080/api/transfers/1
     "status": "TRAN_CREATED",
     "remarks": "Transaction Created"
 }
-
+```
 ## Response 
-
+```
 {
     "id": 3,
     "srcAcctNum": 1,
@@ -261,3 +262,4 @@ GET localhost:8080/api/transfers/1
     "status": "TRAN_FAILED",
     "remarks": "Transaction Failed! Insufficient Balance in Account1"
 }
+```
