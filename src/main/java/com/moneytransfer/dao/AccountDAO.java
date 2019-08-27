@@ -14,7 +14,7 @@ import com.moneytransfer.datamodel.Account;
  * @author admedava
  *
  */
-public class AccountDAO implements DAO<Account> {
+public class AccountDAO implements DAO<Account, Integer> {
 
 	private MoneyTransferDB databaseInstance;
 
@@ -38,7 +38,7 @@ public class AccountDAO implements DAO<Account> {
 		databaseInstance.removeAccount(account.getId());
 	}
 
-	public Account getAccountById(Integer accountId) {
+	public Account getById(Integer accountId) {
 		return databaseInstance.getAccountById(accountId);
 	}
 
@@ -46,7 +46,7 @@ public class AccountDAO implements DAO<Account> {
 		return databaseInstance.getAccountById(accountId) != null;
 	}
 
-	public void deleteAccountById(Integer accountId) {
+	public void deleteById(Integer accountId) {
 		databaseInstance.removeAccount(accountId);
 	}
 

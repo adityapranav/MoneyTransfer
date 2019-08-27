@@ -14,7 +14,7 @@ import com.moneytransfer.datamodel.TransferStatus;
  * @author admedava
  *
  */
-public class TransferDAO implements DAO<Transfer> {
+public class TransferDAO implements DAO<Transfer, Integer> {
 
 	private MoneyTransferDB databaseInstance;
 	
@@ -38,7 +38,7 @@ public class TransferDAO implements DAO<Transfer> {
 		databaseInstance.removeTransfer(t.getId());
 	}
 
-	public Transfer getTransferById(Integer transferId) {
+	public Transfer getById(Integer transferId) {
 		return databaseInstance.getTransferById(transferId);
 	}
 	
@@ -46,7 +46,7 @@ public class TransferDAO implements DAO<Transfer> {
 		return databaseInstance.getTransferById(transferId) != null;
 	}
 
-	public void deleteTransferById(Integer transferId) {
+	public void deleteById(Integer transferId) {
 		databaseInstance.removeTransfer(transferId);
 	}
 	
