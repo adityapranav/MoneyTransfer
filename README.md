@@ -102,6 +102,8 @@ GET localhost:8080/api/accounts/1
 ## Request
 DELETE localhost:8080/api/accounts/1
 
+## Response
+Http status 204 with No Content
 
 # Update an Account
 
