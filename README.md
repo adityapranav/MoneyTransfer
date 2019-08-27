@@ -61,10 +61,10 @@ and Program Arguments  "run com.moneytransfer.controller.MoneyTransferController
 6. com.moneytransfer.dao acts as a Data Access Layer that the Controllers use to interact with the database.
 
 # Running Tests ( Functional Tests )
-
-## Function Tests need to be run after starting the applicaiton.
-## Run maven test with -Dskiptests=false ( This is true by default in pom.xml )
-
+```
+Functional Tests need to be run after starting the applicaiton.
+Run maven test with -Dskiptests=false ( This is true by default in pom.xml )
+```
 # Examples to use the Service 
 
 # Create an Account
