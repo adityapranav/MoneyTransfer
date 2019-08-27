@@ -7,8 +7,10 @@
 2. Create a Transfer between two Accounts of same currency. Execute the Transfer to commit it.
 
 ## NOTE: 
-    Transfer creation is extremely dumb. 
-    Transfer execution checks for the below aspects
+    
+    Transfer creation is extremely dumb. This is a http POST on Transfer
+    Transfer execution checks for the below aspects. This is a http PUT on a created Transfer.
+    
    a. Whether the transaction is in a sane ( TRAN_CREATED ) state ( There are three status for a Transacion TRAN_CREATED, TRAN_EXECUTED, TRAN_FAILED )
    b. Whether the source and Destination accounts have same currency.
    
@@ -34,6 +36,8 @@ Eclipse, Maven, Java8, vertx.
 # Program Arguments in Eclipse 
 ## run com.moneytransfer.controller.MoneyTransferController
 ## The above is the starting point which creates a server listening on port 8080 
+
+# Examples to use the Service 
 
 # Create an Account
 
