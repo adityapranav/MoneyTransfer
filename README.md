@@ -41,12 +41,12 @@ Eclipse, Maven, Java8, vert.x.
 ```
 ## However, if you don't want to install vert.x cmdline, Follow the below instructions using Eclipse 
 ```
-`import the project as Maven Project. Right Click and use 
- Run As->Maven Install
- to build the application. 
- Once the build is successful, create the Run Configuration in Eclipse with Main class as 
+import the project as Maven Project. Right Click and use 
+Run As->Maven Install
+to build the application. 
+Once the build is successful, create the Run Configuration in Eclipse with Main class as 
 io.vertx.core.Starter
-and Program Arguments ```run com.moneytransfer.controller.MoneyTransferController```
+and Program Arguments  "run com.moneytransfer.controller.MoneyTransferController"
 ```
 ## run com.moneytransfer.controller.MoneyTransferController
 ## The above is the starting point which creates a server listening on port 8080 
