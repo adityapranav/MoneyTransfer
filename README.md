@@ -29,11 +29,14 @@
 
 4. Telemetry/Logging ( we can have a requestID (a GUID that uniquely identifies the request) along with datetime, other needed detaisl to troubleshoot )
 
+5. Currently functional tests are written. write small unit tests using a Mock library ( May be NSubstitute ?? ) and write. 
+
 # Tools and Technologies used to develop this 
 
 Eclipse, Maven, Java8, vert.x.
 
 # Running This Application 
+## The service runs on 8080 port on local host.
 
 ``` This Project is developed using vert.x, 
     The executable jar can be used on vert.x cmdline, which needs you to install vert.x cmdline.
@@ -48,8 +51,19 @@ Once the build is successful, create the Run Configuration in Eclipse with Main 
 io.vertx.core.Starter
 and Program Arguments  "run com.moneytransfer.controller.MoneyTransferController"
 ```
-## run com.moneytransfer.controller.MoneyTransferController
-## The above is the starting point which creates a server listening on port 8080 
+# Pointers to Look at Code
+
+1. com.moneytransfer.controller.MoneyTransferController is the entry point. This registers handlers for various end points and other controllers.
+2. AccountController acts as a Controller responsible for Accounts Api.
+3. TransferController acts as a Controller responsible for Transfers Api.
+4. DataModel has Account and Transfer Objects. ( com.moneytransfer.datamodel )
+5. In Memory Database composes the Account and Transfer Model Objects. ( com.moneytransfer.database )
+6. com.moneytransfer.dao acts as a Data Access Layer that the Controllers use to interact with the database.
+
+# Running Tests ( Functional Tests )
+
+## Function Tests need to be run after starting the applicaiton.
+## Run maven test with -Dskiptests=false ( This is true by default in pom.xml )
 
 # Examples to use the Service 
 
