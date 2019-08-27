@@ -15,6 +15,12 @@ import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 
+/**
+ * AccountController handles the Http requests to the Resource Account.
+ * 
+ * @author Aditya.
+ *
+ */
 public class AccountController {
 
 	private static AccountDAO acDAO = null;
@@ -22,7 +28,10 @@ public class AccountController {
 	public static void setDAO(AccountDAO accountDAO) {
 		acDAO = accountDAO;
 	}
-
+	
+	/** Creates account in the system.
+	 * @param context - vert.x routing context.
+	 */
 	public static void createAccount(RoutingContext context) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
@@ -43,11 +52,9 @@ public class AccountController {
 		}
 	}
 
-	private static boolean isCurrencyValid(Currency accountCurrency) {
-		// validating currency
-		return Currency.getAvailableCurrencies().contains(accountCurrency);
-	}
-
+	/** gets all accounts in the system and the JSON array of accounts is written to Http stream.
+	 * @param context - vert.x routing context.
+	 */
 	public static void getAllAccounts(RoutingContext context) {
 
 		try {
@@ -60,14 +67,19 @@ public class AccountController {
 					.end(Json.encodePrettily(new MoneyTransferException("AccountRetrieval", e.getMessage())));
 		}
 	}
-
+	
+	/**
+	 * returns the Account details for a given account Id and writes the account details 
+	 * as JSON to HTTP response stream.
+	 * @param context - vert.x routing context
+	 */
 	public static void getAccount(RoutingContext context) {
 		final String id = context.request().getParam("id");
 		if (id == null) {
 			context.response().setStatusCode(HttpStatusCode.BAD_REQUEST).end();
 		} else {
 			final Integer accountId = Integer.valueOf(id);
-			Account account = acDAO.getAccountById(accountId);
+			Account account = acDAO.getById(accountId);
 			if (account == null) {
 				context.response().setStatusCode(HttpStatusCode.PAGE_NOT_FOUND).end();
 			} else {
@@ -77,6 +89,10 @@ public class AccountController {
 		}
 	}
 
+	/**
+	 * Deletes the given account.  
+	 * @param context - vert.x routing context
+	 */
 	public static void deleteAccount(RoutingContext context) {
 		final String id = context.request().getParam("id");
 		if (id == null) {
@@ -84,11 +100,15 @@ public class AccountController {
 		} else if (!acDAO.doesAccountExist(Integer.valueOf(id))) {
 			context.response().setStatusCode(HttpStatusCode.PAGE_NOT_FOUND).end();
 		} else {
-			acDAO.deleteAccountById(Integer.valueOf(id));
+			acDAO.deleteById(Integer.valueOf(id));
 			context.response().setStatusCode(HttpStatusCode.DELETE_OK).end();
 		}
 	}
 
+	/**
+	 * Updates the Account Details. Currency is validated while updating.
+	 * @param context - vert.x routing context
+	 */
 	public static void updateAccount(RoutingContext context) {
 		  
 		 final String id = context.request().getParam("id");
@@ -98,7 +118,7 @@ public class AccountController {
              context.response().setStatusCode(HttpStatusCode.BAD_REQUEST).end();
 		 } else {
              final Integer idAsInteger = Integer.valueOf(id);
-             Account account = acDAO.getAccountById(idAsInteger);
+             Account account = acDAO.getById(idAsInteger);
              if (account == null) {
                  context.response().setStatusCode(HttpStatusCode.PAGE_NOT_FOUND).end();
              } else {
@@ -128,5 +148,15 @@ public class AccountController {
                  }
              }
 		 }
+	}
+	
+	/**
+	 * Validates the Account Currency.
+	 * @param accountCurrency - Account Currency
+	 * @return - true if currency is valid.
+	 */
+	private static boolean isCurrencyValid(Currency accountCurrency) {
+		// validating currency
+		return Currency.getAvailableCurrencies().contains(accountCurrency);
 	}
 }

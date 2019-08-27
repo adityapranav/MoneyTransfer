@@ -9,6 +9,14 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 
+/**
+ * MoneyTransferController is the entry point class for MoneyTransfer service.
+ * Requests are routed to AccountController and TransferController based on the
+ * incoming request.
+ * 
+ * @author Aditya.
+ *
+ */
 public class MoneyTransferController extends AbstractVerticle {
 
 	private static final MoneyTransferDB databaseInstance = MoneyTransferDB.getDatabaseInstance();
@@ -36,24 +44,27 @@ public class MoneyTransferController extends AbstractVerticle {
 		});
 	}
 
+	/**
+	 * This method registers handlers for various API end points.
+	 * @param router - vert.x router
+	 */
 	private void registerHandlers(Router router) {
 		router.route().handler(BodyHandler.create());
 		
 		// Accounts API Handlers
 		AccountController.setDAO(acDAO);
-		router.post("/api/accounts").blockingHandler(AccountController::createAccount);
-		router.get("/api/accounts").blockingHandler(AccountController::getAllAccounts);
-		router.get("/api/accounts/:id").blockingHandler(AccountController::getAccount);
-		router.delete("/api/accounts/:id").blockingHandler(AccountController::deleteAccount);
-		router.patch("/api/accounts/:id").blockingHandler(AccountController::updateAccount);
-		// we can do a patch as well.
+		router.post("/api/accounts").handler(AccountController::createAccount);
+		router.get("/api/accounts").handler(AccountController::getAllAccounts);
+		router.get("/api/accounts/:id").handler(AccountController::getAccount);
+		router.delete("/api/accounts/:id").handler(AccountController::deleteAccount);
+		router.patch("/api/accounts/:id").handler(AccountController::updateAccount);
 		
 		// Transactions API Handlers
 		TransferController.setDAO(tranDAO);
-		router.post("/api/transfers").blockingHandler(TransferController::createTransfer);
-		router.get("/api/transfers").blockingHandler(TransferController::getAllTransfers);
-		router.put("/api/transfers/:id").blockingHandler(TransferController::executeTransfer);
-		router.get("/api/transfers/:id").blockingHandler(TransferController::getTransfer);
+		router.post("/api/transfers").handler(TransferController::createTransfer);
+		router.get("/api/transfers").handler(TransferController::getAllTransfers);
+		router.get("/api/transfers/:id").handler(TransferController::getTransfer);
+		router.put("/api/transfers/:id").handler(TransferController::executeTransfer);
 	}
 
 }

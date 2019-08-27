@@ -13,6 +13,12 @@ import com.moneytransfer.datamodel.TransferStatus;
 import io.vertx.core.json.Json;
 import io.vertx.ext.web.RoutingContext;
 
+/**
+ * TransferController handles the Http requests to the Resource Transfer.
+ * 
+ * @author Aditya.
+ *
+ */
 public class TransferController {
 
 	private static TransferDAO tranDAO = null;
@@ -20,7 +26,10 @@ public class TransferController {
 	public static void setDAO(TransferDAO transactionDAO) {
 		tranDAO = transactionDAO;
 	}
-
+	
+	/** Creates transfer in the system.
+	 * @param context - vert.x routing context.
+	 */
 	public static void createTransfer(RoutingContext context) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
@@ -37,6 +46,9 @@ public class TransferController {
 		}
 	}
 
+	/** gets all transfers in the system and the JSON array of transfers is written to Http stream.
+	 * @param context - vert.x routing context.
+	 */
 	public static void getAllTransfers(RoutingContext context) {
        try {
 			List<Transfer> transferList = tranDAO.getAll();
@@ -47,13 +59,17 @@ public class TransferController {
 		}
 	}
 	
+	/** executes the given transfer (id) and writes the transfer JSON to the Http Response stream.
+	 * The Transfer JSON will have its remarks updated appropriately.
+	 * @param context - vert.x routing context.
+	 */
 	public static synchronized void executeTransfer(RoutingContext context) {
 		final String id = context.request().getParam("id");
 		if (id == null) {
 			context.response().setStatusCode(HttpStatusCode.BAD_REQUEST).end();
 		} else {
 			final Integer tranId = Integer.valueOf(id);
-			Transfer transfer = tranDAO.getTransferById(tranId);
+			Transfer transfer = tranDAO.getById(tranId);
 			if (transfer == null) {
 				context.response().setStatusCode(HttpStatusCode.PAGE_NOT_FOUND).end();
 			} else {
@@ -81,6 +97,35 @@ public class TransferController {
 		}
 	}
 
+	/**
+	 * returns the transfer details for a given transfer Id and writes the transfer details 
+	 * as JSON to HTTP response stream.
+	 * @param context - vert.x routing context
+	 */
+	public static void getTransfer(RoutingContext context) {
+		final String id = context.request().getParam("id");
+		if (id == null) {
+			context.response().setStatusCode(HttpStatusCode.BAD_REQUEST).end();
+		} else {
+			final Integer tranId = Integer.valueOf(id);
+			Transfer transfer = tranDAO.getById(tranId);
+			if (transfer == null) {
+				context.response().setStatusCode(HttpStatusCode.PAGE_NOT_FOUND).end();
+			} else {
+				context.response().putHeader("content-type", "application/json; charset=utf-8")
+						.end(Json.encodePrettily(transfer));
+			}
+		}
+	}
+	
+	/**
+	 * validates the Transfer. Updates the Transaction remarks field of the Transaction.
+	 * @param transfer    - Transfer being validated
+	 * @param srcAccount  - source account of the transfer
+	 * @param destAccount - destination account of the transfer
+	 * @param tranRemarks - transaction Remarks. This gets updated appropriately.
+	 * @return            - true if the transfer is valid.
+	 */
 	private static boolean validateTransfer(Transfer transfer,Account srcAccount, Account destAccount, StringBuffer tranRemarks) {
         
 		String failureRemarks="";
@@ -108,21 +153,5 @@ public class TransferController {
 			tranRemarks.append("Transaction Executed Successfully!");
 		}
         return true;
-	}
-
-	public static void getTransfer(RoutingContext context) {
-		final String id = context.request().getParam("id");
-		if (id == null) {
-			context.response().setStatusCode(HttpStatusCode.BAD_REQUEST).end();
-		} else {
-			final Integer tranId = Integer.valueOf(id);
-			Transfer transfer = tranDAO.getTransferById(tranId);
-			if (transfer == null) {
-				context.response().setStatusCode(HttpStatusCode.PAGE_NOT_FOUND).end();
-			} else {
-				context.response().putHeader("content-type", "application/json; charset=utf-8")
-						.end(Json.encodePrettily(transfer));
-			}
-		}
 	}
 }
