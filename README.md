@@ -27,13 +27,23 @@
 
 3. Transaction fee processing.
 
-4. Persistent Logging 
+4. Telemetry/Logging ( we can have a requestID (a GUID that uniquely identifies the request) along with datetime, other needed detaisl to troubleshoot )
 
 # Tools and Technologies used to develop this 
 
-Eclipse, Maven, Java8, vertx.
+Eclipse, Maven, Java8, vert.x.
 
-# Program Arguments in Eclipse 
+# Running This Application 
+
+## This Project is developed using vert.x, The executable jar can be used on vert.x cmdline. The mainclass is "io.vertx.core.Starter" and the program arguments is "run com.moneytransfer.controller.MoneyTransferController"
+
+## However, if you don't want to install vert.x cmdline, import the project as Maven Project. Right Click and use 
+```Run As->Maven Install```
+##  to build the application. Once the build is successful, create the Run Configuration in Eclipse with Main class as 
+```io.vertx.core.Starter``` 
+## and Program Arguments ```run com.moneytransfer.controller.MoneyTransferController```
+
+
 ## run com.moneytransfer.controller.MoneyTransferController
 ## The above is the starting point which creates a server listening on port 8080 
 
