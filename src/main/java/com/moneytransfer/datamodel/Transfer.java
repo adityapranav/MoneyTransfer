@@ -6,8 +6,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
+ * Data Model class for Transfer 
+ * 
  * @author admedava
- * @Summary Model class for Money Transfer between two accounts.
+ *
  */
 public class Transfer {
 	

@@ -8,8 +8,10 @@ import java.util.Currency;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @author Aditya
- * @Summary Model class for Account.
+ * Data Model class for Account 
+ * 
+ * @author admedava
+ *
  */
 public class Account {
 
@@ -25,6 +27,7 @@ public class Account {
 	}
 	
 	public Account(String accountName, BigDecimal initialBalance, Currency accountCurrency) {
+		this.id = ACCOUNTIDSEQUENCE.addAndGet(1);
 		name = accountName;
 		balance = initialBalance;
 		currency = accountCurrency;
