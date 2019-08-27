@@ -31,6 +31,10 @@
 
 Eclipse, Maven, Java8, vertx.
 
+# Program Arguments in Eclipse 
+## run com.moneytransfer.controller.MoneyTransferController
+## The above is the starting point which creates a server listening on port 8080 
+
 # Create an Account
 
 ## Request
