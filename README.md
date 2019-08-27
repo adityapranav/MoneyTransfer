@@ -35,15 +35,19 @@ Eclipse, Maven, Java8, vert.x.
 
 # Running This Application 
 
-## This Project is developed using vert.x, The executable jar can be used on vert.x cmdline. The mainclass is "io.vertx.core.Starter" and the program arguments is "run com.moneytransfer.controller.MoneyTransferController"
-
-## However, if you don't want to install vert.x cmdline, import the project as Maven Project. Right Click and use 
-```Run As->Maven Install```
-##  to build the application. Once the build is successful, create the Run Configuration in Eclipse with Main class as 
-```io.vertx.core.Starter``` 
-## and Program Arguments ```run com.moneytransfer.controller.MoneyTransferController```
-
-
+``` This Project is developed using vert.x, 
+    The executable jar can be used on vert.x cmdline, which needs you to install vert.x cmdline.
+    The mainclass is "io.vertx.core.Starter" and the program arguments is "run com.moneytransfer.controller.MoneyTransferController"
+```
+## However, if you don't want to install vert.x cmdline, Follow the below instructions using Eclipse 
+```
+`import the project as Maven Project. Right Click and use 
+ Run As->Maven Install
+ to build the application. 
+ Once the build is successful, create the Run Configuration in Eclipse with Main class as 
+io.vertx.core.Starter
+and Program Arguments ```run com.moneytransfer.controller.MoneyTransferController```
+```
 ## run com.moneytransfer.controller.MoneyTransferController
 ## The above is the starting point which creates a server listening on port 8080 
 
