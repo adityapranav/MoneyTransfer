@@ -47,9 +47,15 @@ Eclipse, Maven, Java8, vert.x.
 import the project as Maven Project. Right Click and use 
 Run As->Maven Install
 to build the application. 
-Once the build is successful, create the Run Configuration in Eclipse with Main class as 
+Once the build is successful, create the Run Configuration in Eclipse with Main class as io.
 io.vertx.core.Starter
 and Program Arguments  "run com.moneytransfer.controller.MoneyTransferController"
+```
+# Running Tests ( Functional Tests )
+```
+Functional Tests need to be run after starting the applicaiton.
+So, first run the application as stated in the above section ( specify Mainclass and Program Arguemnts ).
+Run the mvn Goal "test -DskipTests=false" ( This is true by default in pom.xml )
 ```
 # Pointers to Look at Code
 
@@ -59,12 +65,6 @@ and Program Arguments  "run com.moneytransfer.controller.MoneyTransferController
 4. DataModel has Account and Transfer Objects. ( com.moneytransfer.datamodel )
 5. In Memory Database composes the Account and Transfer Model Objects. ( com.moneytransfer.database )
 6. com.moneytransfer.dao acts as a Data Access Layer that the Controllers use to interact with the database.
-
-# Running Tests ( Functional Tests )
-```
-Functional Tests need to be run after starting the applicaiton.
-Run maven test with -Dskiptests=false ( This is true by default in pom.xml )
-```
 # Examples to use the Service 
 
 # Create an Account
